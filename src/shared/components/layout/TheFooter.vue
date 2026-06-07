@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 	const date = new Date().getFullYear();
 </script>
 
@@ -7,7 +9,7 @@
 		<div
 			class="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
 		>
-			<p class="text-2xl text-primary text-center md:text-left">Pulsify</p>
+			<RouterLink to="/" class="text-2xl text-primary text-center md:text-left">Pulsify</RouterLink>
 			<nav aria-label="Footer navigation">
 				<ul class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
 					<li>
