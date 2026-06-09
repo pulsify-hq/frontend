@@ -41,7 +41,7 @@ import { RouterLink } from 'vue-router';
 				</ul>
 			</nav>
 			<p class="text-text-muted/50 text-xs text-center md:text-right">
-				&copy; {{ date }} Pulsify Monitoring. All rights reserved.
+				&copy; {{ date }} Pulsify. All rights reserved.
 			</p>
 		</div>
 	</footer>

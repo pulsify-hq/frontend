@@ -18,10 +18,13 @@
 			"bg-primary border-primary text-black hover:bg-primary-dim hover:border-primary-dim btn-primary",
 		secondary:
 			"bg-transparent border-border text-white hover:bg-border border-2",
-		destructive: "bg-error border-error hover:bg-error/75",
+		destructive: "bg-error/10 border-error/20 text-error hover:bg-error/15",
 	};
 
 	const buttonStyle = computed(() => variantClasses[props.variant]);
+    const disabledButtonStyle = computed(() => {
+        return props.disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+    })
 </script>
 
 <template>
@@ -29,8 +32,9 @@
 		:type="type"
 		:disabled="disabled"
 		:aria-disabled="disabled"
-		:class="buttonStyle"
-		class="px-4 py-1 md:px-4 md:py-2 text-sm md:text-base border rounded-md font-semibold"
+		:class="buttonStyle, disabledButtonStyle"
+		class="px-4 py-2 text-sm md:text-base border rounded-md font-semibold transition-colors duration-200"
+
 	>
 		<slot></slot>
 	</button>

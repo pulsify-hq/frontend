@@ -6,7 +6,7 @@ import TheFooter from './shared/components/layout/TheFooter.vue';
 
 <template>
   <LandingView />
-  <TheFooter />
+  
   <RouterView />
 </template>
 
