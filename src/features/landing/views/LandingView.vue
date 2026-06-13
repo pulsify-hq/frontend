@@ -33,8 +33,11 @@
 		aria-label="Site header"
 		class="flex items-center justify-between border-b border-border-muted py-2 md:py-6 px-4 md:px-8"
 	>
-		<RouterLink to="/" class="text-2xl text-primary">Pulsify</RouterLink>
-		<BaseButton>Get Started</BaseButton>
+		<RouterLink to="/" class="text-2xl text-primary"> Pulsify </RouterLink>
+
+		<RouterLink :to="{ name: 'auth' }"
+			><BaseButton>Get Started</BaseButton>
+		</RouterLink>
 	</header>
 	<main>
 		<section
@@ -61,7 +64,9 @@
 				Know the moment your services go down. Pulsify monitors your URLs around
 				the clock and alerts you instantly when something breaks.
 			</p>
-			<BaseButton class="">Start Monitoring Now</BaseButton>
+			<RouterLink :to="{name: 'auth'}">
+				<BaseButton class="">Start Monitoring Now</BaseButton>
+			</RouterLink>
 			<div class="absolute bottom-0 left-0 w-full overflow-hidden opacity-30">
 				<svg
 					viewBox="0 0 1200 100"
