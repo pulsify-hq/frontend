@@ -1,12 +1,18 @@
 <script setup lang="ts">
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
-	import BaseCard from "@/shared/components/base/BaseCard.vue";
 	import BaseInput from "@/shared/components/base/BaseInput.vue";
-	import { ref, watch } from "vue";
+	import { ref, watch, computed } from "vue";
+	import { useAuthStore } from "../stores/authStore";
+	import { useRouter } from "vue-router";
+
+	const store = useAuthStore();
+	const router = useRouter();
 
 	const email = ref("");
 	const password = ref("");
 	const confirmedPassword = ref("");
+
+	const failCount = ref<number>(0);
 
 	interface Props {
 		mode?: "login" | "signup";
@@ -16,14 +22,42 @@
 		mode: "signup",
 	});
 
-	const passwordError = ref("");
+	const passwordError = ref<null | string>("");
 	const confirmedPasswordError = ref("");
 
+	const disableSubmit = computed(() => {
+		if (props.mode === "login") return !email.value || !password.value;
+		return (
+			!email.value ||
+			password.value.length < 8 ||
+			password.value !== confirmedPassword.value
+		);
+	});
 
-	function handleSubmit() {
-		if (props.mode === 'login') return
+	async function handleSubmit() {
+		store.error = null;
+
+		if (props.mode === "login") {
+			const success = await store.login(email.value, password.value);
+
+			if (success) {
+				router.push({ name: "home" });
+			} else {
+				failCount.value++;
+				passwordError.value = store.error;
+			}
+		}
+
+		if (props.mode === "signup") {
+			const success = await store.signup(email.value, password.value);
+
+			if (success) {
+				router.push({ name: "home" });
+			} else {
+				passwordError.value = store.error;
+			}
+		}
 	}
-
 
 	watch(password, (newVal) => {
 		if (newVal.length === 0) {
@@ -49,12 +83,10 @@
 
 	watch(
 		() => props.mode,
-		(newVal, oldValue) => {
-			if (newVal !== oldValue) {
-				email.value = "";
-				password.value = "";
-				confirmedPassword.value = "";
-			}
+		() => {
+			email.value = "";
+			password.value = "";
+			confirmedPassword.value = "";
 		},
 	);
 </script>
@@ -64,7 +96,7 @@
 		{{ mode === "login" ? "Sign in to" : "Sign up for" }} Pulsify
 	</h2>
 
-	<form action="" class="flex flex-col gap-8" @submit.prevent>
+	<form action="" class="flex flex-col gap-8" @submit.prevent="handleSubmit">
 		<div class="flex flex-col gap-6">
 			<BaseInput
 				v-model="email"
@@ -76,7 +108,6 @@
 				autocomplete="email"
 			/>
 
-			<!-- Password Field Group -->
 			<BaseInput
 				v-model="password"
 				label="Password"
@@ -98,6 +129,13 @@
 				autocomplete="new-password"
 			/>
 		</div>
-		<BaseButton type="submit">Submit</BaseButton>
+		<RouterLink
+			v-show="mode === 'login' && failCount > 1"
+			:to="{ name: 'forgot-password' }"
+			class="text-primary underline text-xs -mt-4"
+		>
+			Forgot Password?
+		</RouterLink>
+		<BaseButton type="submit" :disabled="disableSubmit">Submit</BaseButton>
 	</form>
 </template>

@@ -8,7 +8,7 @@
 	interface Props {
 		modelValue?: string;
 		label?: string;
-		error?: string;
+		error?: string |null;
 		hint?: string;
 		type?: "text" | "email" | "password" | "url" | "number" | "tel";
 	}
