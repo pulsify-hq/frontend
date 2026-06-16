@@ -3,7 +3,6 @@
 </script>
 
 <script setup lang="ts">
-	import { computed } from "vue";
 
 	interface Props {
 		modelValue?: string;

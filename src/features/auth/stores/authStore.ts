@@ -1,4 +1,5 @@
 import { mockOTP, mockUsers } from "@/shared/utils/mockData";
+
 import { defineStore } from "pinia";
 
 interface AuthState {
@@ -32,17 +33,16 @@ export const useAuthStore = defineStore("auth", {
 			if (user) {
 				this.isLoading = false;
 				this.user = email;
-				console.log("ffff");
+				this.token = "mock_token_123"; // In a real app, this would come from the server
 				return true;
 			} else {
 				this.isLoading = false;
-				console.log("fail");
 				this.error = "Invalid email or password";
 				return false;
 			}
 		},
 
-		logout() {
+		async logout() {
 			this.user = null;
 			this.token = null;
 			this.userEmail = null;
@@ -58,6 +58,7 @@ export const useAuthStore = defineStore("auth", {
 			} else {
 				mockUsers.push({ email, password });
 				this.user = email;
+				this.token = 'mock_token_123';
 				this.isLoading = false;
 				return true;
 			}
@@ -68,10 +69,9 @@ export const useAuthStore = defineStore("auth", {
 				(u) => u.email.toLowerCase() === email.toLowerCase(),
 			);
 
-			if (userIndex === -1) return;
-			
+			if (userIndex === -1) return false;
+
 			mockUsers[userIndex]!.password = newPassword;
-			console.log(mockUsers[userIndex]);
 			return true;
 		},
 
@@ -80,10 +80,9 @@ export const useAuthStore = defineStore("auth", {
 				(u) => u.email.toLowerCase() === email.toLowerCase(),
 			);
 
-			if (userIndex === -1) return;
+			if (userIndex === -1) return false;
 
 			mockUsers.splice(userIndex, 1);
-			console.log(mockUsers);
 			return true;
 		},
 
