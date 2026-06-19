@@ -5,7 +5,6 @@ import { defineStore } from "pinia";
 interface AuthState {
 	user: null | string;
 	token: null | string;
-	userEmail: null | string;
 	isLoading: boolean;
 	error: null | string;
 }
@@ -14,7 +13,6 @@ export const useAuthStore = defineStore("auth", {
 	state: (): AuthState => ({
 		user: null,
 		token: null,
-		userEmail: null,
 		isLoading: false,
 		error: null,
 	}),
@@ -45,7 +43,6 @@ export const useAuthStore = defineStore("auth", {
 		async logout() {
 			this.user = null;
 			this.token = null;
-			this.userEmail = null;
 		},
 
 		async signup(email: string, password: string) {
@@ -58,7 +55,7 @@ export const useAuthStore = defineStore("auth", {
 			} else {
 				mockUsers.push({ email, password });
 				this.user = email;
-				this.token = 'mock_token_123';
+				this.token = "mock_token_123";
 				this.isLoading = false;
 				return true;
 			}

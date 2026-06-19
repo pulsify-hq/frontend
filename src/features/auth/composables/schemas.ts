@@ -16,8 +16,12 @@ export const signupSchema = z
 		path: ["confirmPassword"],
 	});
 
-export const OTPschema = z.object({
+export const OTPSchema = z.object({
 	email: z.string().email("Invalid email address"),
+	OTP: z.string().min(6, "Invalid OTP"),
+});
+
+export const OTPOnlySchema = z.object({
 	OTP: z.string().min(6, "Invalid OTP"),
 });
 
@@ -33,5 +37,5 @@ export const resetPasswordSchema = z
 
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;
-export type OTPInput = z.infer<typeof OTPschema>;
+export type OTPInput = z.infer<typeof OTPSchema>;
 export type ResetPasswordinput = z.infer<typeof resetPasswordSchema>;
