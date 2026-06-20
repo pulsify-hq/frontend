@@ -26,14 +26,18 @@
 
 	function handleOTPVerified() {
 		if (props.mode === "default") {
-			router.push({ name: "home" });
+			router.push({ name: "dashboard" });
 			return;
 		}
 		step.value = 3;
 	}
 
 	function handleDone() {
-		router.push({ name: "home" });
+		if (props.mode === "delete") {
+			router.push({ name: "home" });
+		} else {
+			router.push({ name: "dashboard" });
+		}
 	}
 </script>
 

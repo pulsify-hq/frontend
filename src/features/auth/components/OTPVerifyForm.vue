@@ -7,6 +7,7 @@
 	import BaseInput from "@/shared/components/base/BaseInput.vue";
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
+import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner.vue';
 
 	const props = defineProps<{ email: string }>();
 	const emit = defineEmits<{ verified: [] }>();
@@ -44,6 +45,9 @@
 			autocomplete="one-time-code"
 		/>
 
-		<BaseButton type="submit" :disabled="!meta.valid">Verify</BaseButton>
+		<BaseButton type="submit" :disabled="!meta.valid || store.isLoading">
+			<LoadingSpinner v-if="store.isLoading" />
+			<span v-else>Verify</span>
+		</BaseButton>
 	</form>
 </template>

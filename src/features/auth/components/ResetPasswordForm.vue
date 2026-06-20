@@ -6,6 +6,7 @@
 	import BaseInput from "@/shared/components/base/BaseInput.vue";
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
+import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner.vue';
 
 	const props = defineProps<{ email: string }>();
 	const emit = defineEmits<{ done: [] }>();
@@ -53,8 +54,9 @@
 			autocomplete="new-password"
 		/>
 
-		<BaseButton type="submit" :disabled="!meta.valid"
-			>Reset Password</BaseButton
-		>
+		<BaseButton type="submit" :disabled="!meta.valid || store.isLoading">
+			<LoadingSpinner v-if="store.isLoading" />
+			<span v-else>Reset Password</span>
+		</BaseButton>
 	</form>
 </template>

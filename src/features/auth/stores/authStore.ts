@@ -1,6 +1,6 @@
-import { mockOTP, mockUsers } from "@/shared/utils/mockData";
-
 import { defineStore } from "pinia";
+import api from "@/shared/utils/api";
+import axios from "axios";
 
 interface AuthState {
 	user: null | string;
@@ -24,90 +24,140 @@ export const useAuthStore = defineStore("auth", {
 	actions: {
 		async login(email: string, password: string) {
 			this.isLoading = true;
-			const user = mockUsers.find(
-				(u) => u.email === email && u.password === password,
-			);
+			this.error = null;
 
-			if (user) {
-				this.isLoading = false;
+			try {
+				const response = await api.post("/auth/login", { email, password });
+				this.token = response.data.token;
 				this.user = email;
-				this.token = "mock_token_123"; // In a real app, this would come from the server
+				localStorage.setItem("token", this.token as string);
 				return true;
-			} else {
-				this.isLoading = false;
-				this.error = "Invalid email or password";
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error = err.response?.data?.message ?? "Something went wrong";
+				} else {
+					this.error = "Something went wrong";
+				}
 				return false;
+			} finally {
+				this.isLoading = false;
 			}
 		},
 
 		async logout() {
-			this.user = null;
-			this.token = null;
+			try {
+				await api.post("/auth/logout");
+			} catch {
+				// ignore errors, we're logging out regardless
+			} finally {
+				this.user = null;
+				this.token = null;
+				localStorage.removeItem("token");
+			}
 		},
 
-		async signup(email: string, password: string) {
+		async signup(email: string, password: string, userName: string) {
 			this.isLoading = true;
+			this.error = null;
 
-			if (mockUsers.find((u) => u.email === email)) {
-				this.error = "Email already in use";
-				this.isLoading = false;
-				return false;
-			} else {
-				mockUsers.push({ email, password });
+			try {
+				const response = await api.post("/auth/signup", {
+					email,
+					password,
+					userName,
+				});
+				this.token = response.data.token;
 				this.user = email;
-				this.token = "mock_token_123";
-				this.isLoading = false;
+				localStorage.setItem("token", this.token as string);
 				return true;
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error = err.response?.data?.message ?? "Something went wrong";
+				} else {
+					this.error = "Something went wrong";
+				}
+				return false;
+			} finally {
+				this.isLoading = false;
 			}
 		},
 
 		async resetPassword(email: string, newPassword: string) {
-			const userIndex = mockUsers.findIndex(
-				(u) => u.email.toLowerCase() === email.toLowerCase(),
-			);
+			this.isLoading = true;
+			this.error = null;
 
-			if (userIndex === -1) return false;
-
-			mockUsers[userIndex]!.password = newPassword;
-			return true;
+			try {
+				await api.post("/auth/reset", { email, password: newPassword });
+				return true;
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error =
+						err.response?.data?.message ?? "An unexpected error occured";
+				} else {
+					this.error = "Something went wrong";
+				}
+				return false;
+			} finally {
+				this.isLoading = false;
+			}
 		},
 
-		async deleteUser(email: string) {
-			const userIndex = mockUsers.findIndex(
-				(u) => u.email.toLowerCase() === email.toLowerCase(),
-			);
-
-			if (userIndex === -1) return false;
-
-			mockUsers.splice(userIndex, 1);
-			return true;
+		async deleteUser() {
+			this.isLoading = true;
+			this.error = null;
+			try {
+				await api.delete("/account");
+				this.user = null;
+				this.token = null;
+				localStorage.removeItem("token");
+				return true;
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error = err.response?.data?.message ?? "Something went wrong";
+				} else {
+					this.error = "Something went wrong";
+				}
+				return false;
+			} finally {
+				this.isLoading = false;
+			}
 		},
 
 		async forgotPassword(email: string) {
 			this.isLoading = true;
+			this.error = null;
 
-			if (mockUsers.find((u) => u.email === email)) {
-				this.isLoading = false;
+			try {
+				await api.post("/auth/otp/request", { email });
 				return true;
-			} else {
-				this.error = "No account found with this email";
-				this.isLoading = false;
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error = err.response?.data?.message ?? "Invalid credentials";
+				} else {
+					this.error = "Something went wrong";
+				}
 				return false;
+			} finally {
+				this.isLoading = false;
 			}
 		},
 
 		async checkOTP(email: string, OTPCode: string) {
 			this.isLoading = true;
+			this.error = null;
 
-			const user = mockOTP.find((u) => u.email === email && u.OTP === OTPCode);
-
-			if (user) {
-				this.isLoading = false;
+			try {
+				await api.post("/auth/otp/verify", { email, otp: OTPCode });
 				return true;
-			} else {
-				this.error = "Invalid OTP";
-				this.isLoading = false;
+			} catch (err) {
+				if (axios.isAxiosError(err)) {
+					this.error = err.response?.data?.message ?? "Invalid credentials";
+				} else {
+					this.error = "Something went wrong";
+				}
 				return false;
+			} finally {
+				this.isLoading = false;
 			}
 		},
 

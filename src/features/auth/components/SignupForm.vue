@@ -8,6 +8,7 @@
 	import { useForm } from "vee-validate";
 	import { toTypedSchema } from "@vee-validate/zod";
 	import { signupSchema } from "../composables/schemas";
+	import LoadingSpinner from "@/shared/components/feedback/LoadingSpinner.vue";
 
 	const store = useAuthStore();
 	const router = useRouter();
@@ -16,13 +17,18 @@
 		validationSchema: toTypedSchema(signupSchema),
 	});
 
+	const [userName] = defineField("userName");
 	const [email] = defineField("email");
 	const [password] = defineField("password");
 	const [confirmPassword] = defineField("confirmPassword");
 
 	const onSubmit = handleSubmit(async (values) => {
 		store.error = null;
-		const success = await store.signup(values.email, values.password);
+		const success = await store.signup(
+			values.email,
+			values.password,
+			values.userName,
+		);
 
 		if (success) {
 			router.push({ name: "home" });
@@ -42,6 +48,17 @@
 			<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
 
 			<div class="flex flex-col gap-6">
+				<BaseInput
+					v-model="userName"
+					label="Username"
+					type="text"
+					placeholder="JohnDoe123"
+					hint="Choose what we should call you"
+					:error="errors.userName"
+					required
+					autocomplete="username"
+				/>
+
 				<BaseInput
 					v-model="email"
 					label="Email Address"
@@ -74,7 +91,11 @@
 				/>
 			</div>
 
-			<BaseButton type="submit" :disabled="!meta.valid">Submit</BaseButton>
+			<BaseButton type="submit" :disabled="!meta.valid || store.isLoading
+            ">
+				<LoadingSpinner v-if="store.isLoading" />
+				<span v-else>Submit</span>
+			</BaseButton>
 		</form>
 	</div>
 </template>

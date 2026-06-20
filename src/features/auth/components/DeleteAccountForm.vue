@@ -3,18 +3,16 @@
 	import { useAuthStore } from "../stores/authStore";
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
+	import LoadingSpinner from "@/shared/components/feedback/LoadingSpinner.vue";
 
 	const props = defineProps<{ email: string }>();
 	const emit = defineEmits<{ done: [] }>();
 
 	const store = useAuthStore();
-	const isDeleting = ref(false);
 
 	async function handleDelete() {
 		store.error = null;
-		isDeleting.value = true;
-		const success = await store.deleteUser(props.email);
-		isDeleting.value = false;
+		const success = await store.deleteUser();
 
 		if (success) {
 			emit("done");
@@ -33,10 +31,11 @@
 
 		<BaseButton
 			variant="destructive"
-			:disabled="isDeleting"
+			:disabled="store.isLoading"
 			@click="handleDelete"
 		>
-			{{ isDeleting ? "Deleting..." : "Delete Account" }}
+			<LoadingSpinner v-if="store.isLoading" />
+			<span v-else>Delete Account</span>
 		</BaseButton>
 	</div>
 </template>

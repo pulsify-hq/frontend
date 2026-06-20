@@ -8,6 +8,7 @@
 	import { useForm } from "vee-validate";
 	import { toTypedSchema } from "@vee-validate/zod";
 	import { loginSchema } from "../composables/schemas";
+import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner.vue';
 
 	const store = useAuthStore();
 	const router = useRouter();
@@ -74,7 +75,10 @@
 				Forgot Password?
 			</RouterLink>
 
-			<BaseButton type="submit" :disabled="!meta.valid">Submit</BaseButton>
+			<BaseButton type="submit" :disabled="!meta.valid || store.isLoading">
+				<LoadingSpinner v-if="store.isLoading" />
+				<span v-else>Submit</span>
+			</BaseButton>
 		</form>
 	</div>
 </template>
