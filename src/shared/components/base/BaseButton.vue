@@ -23,7 +23,7 @@
 
 	const buttonStyle = computed(() => variantClasses[props.variant]);
     const disabledButtonStyle = computed(() => {
-        return props.disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+        return props.disabled? 'cursor-not-allowed bg-primary-dim/30 border-primary-dim/10 hover:bg-primary-dim/30 hover:border-primary-dim/10' : 'cursor-pointer'
     })
 </script>
 
