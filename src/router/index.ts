@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/features/auth/stores/authStore";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -18,7 +19,22 @@ const router = createRouter({
 			name: "forgot-password",
 			component: () => import("@/features/auth/views/ForgotPasswordView.vue"),
 		},
-		{path: "/dashboard", name: "dashboard", component: () => import("@/features/dashboard/views/DashboardView.vue")},
+		{
+			path: "/verify-otp",
+			name: "verify-otp",
+			component: () => import("@/features/auth/views/OTPView.vue"),
+		},
+		{
+			path: "/reset-password",
+			name: "reset-password",
+			component: () => import("@/features/auth/views/ResetPasswordView.vue"),
+		},
+		{
+			path: "/dashboard",
+			name: "dashboard",
+			component: () => import("@/features/dashboard/views/DashboardView.vue"),
+			meta: { requiresAuth: true },
+		},
 		{
 			path: "/:pathMatch(.*)*",
 			name: "not-found",
@@ -27,4 +43,11 @@ const router = createRouter({
 	],
 });
 
+router.beforeEach((to) => {
+	const authStore = useAuthStore();
+
+	if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+		return { name: "auth" };
+	}
+});
 export default router;
