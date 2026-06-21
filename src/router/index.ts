@@ -20,10 +20,29 @@ const router = createRouter({
 			component: () => import("@/features/auth/views/ForgotPasswordView.vue"),
 		},
 		{
-			path: "/dashboard",
-			name: "dashboard",
-			component: () => import("@/features/dashboard/views/DashboardView.vue"),
-			meta: { requiresAuth: true },
+			path: "/app",
+			component: () => import("@/shared/components/layout/AppLayout.vue"),
+			children: [
+				{
+					path: "dashboard",
+					name: "dashboard",
+					component: () =>
+						import("@/features/dashboard/views/DashboardView.vue"),
+				},
+				{
+					path: "monitors",
+					name: "monitors",
+					component: () =>
+						import("@/features/monitors/views/MonitorsView.vue"),
+				},
+				{
+					path: "settings",
+					name: "settings",
+					component: () =>
+						import("@/features/settings/views/SettingsView.vue"),
+				},
+			],
+			// meta: { requiresAuth: true },
 		},
 		{
 			path: "/:pathMatch(.*)*",

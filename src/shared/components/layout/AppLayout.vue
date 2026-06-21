@@ -9,7 +9,7 @@
 		class="grid grid-cols-[auto_1fr] max-md:grid-cols-1 min-h-screen max-md:pb-16 bg-background text-text-main"
 	>
 		<section
-			class="bg-surface-high/60 border-r border-surface-highest p-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:w-full max-md:h-fit max-md:z-50 backdrop-blur-md"
+			class="bg-surface-high/60 border-r border-surface-highest p-1.5 md:p-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:w-full max-md:h-fit max-md:z-50 backdrop-blur-md"
 		>
 			<RouterLink
 				to="/"
@@ -22,46 +22,36 @@
 
 			<nav aria-label="Main Navigation">
 				<ul
-					class="flex flex-col max-md:flex-row max-md:justify-around gap-2 max-md:gap-0"
+					class="flex flex-col max-md:flex-row max-md:justify-between gap-2 max-md:gap-0"
 				>
-					<li class="max-md:flex-1">
-						<a
-							href="/dashboard"
-							class="flex items-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg hover:bg-surface-hover group transition-colors"
+					<li
+						class="max-md:flex max-md:flex-1 max-md:items-center max-md:justify-center"
+					>
+						<RouterLink
+							:to="{ name: 'dashboard' }"
+							class="flex items-center justify-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
+							active-class="md:bg-surface-highest text-primary-dim/70 active-tab"
 						>
-							<span
-								class="w-5 h-5 flex-shrink-0 bg-current/20 rounded"
-								aria-hidden="true"
-							>
+							<span class="w-5 h-5 shrink-0 rounded" aria-hidden="true">
+								<img src="/icon-dashboard.svg" alt="" />
 							</span>
-							<span class="text-sm font-medium">Dashboard</span>
-						</a>
+							<span class="text-xs md:text-sm">Dashboard</span>
+						</RouterLink>
 					</li>
 
-					<li class="max-md:flex-1">
-						<a
-							href="/monitors"
-							class="flex items-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg hover:bg-surface-hover group transition-colors"
+					<li
+						class="max-md:flex max-md:flex-1 max-md:items-center max-md:justify-center"
+					>
+						<RouterLink
+							:to="{ name: 'settings' }"
+							class="flex items-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
+							active-class="md:bg-surface-highest text-primary-dim/70 active-tab"
 						>
-							<span
-								class="w-5 h-5 flex-shrink-0 bg-current/20 rounded"
-								aria-hidden="true"
-							></span>
-							<span class="text-sm font-medium">Monitors</span>
-						</a>
-					</li>
-
-					<li class="max-md:flex-1">
-						<a
-							href="/settings"
-							class="flex items-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg hover:bg-surface-hover group transition-colors"
-						>
-							<span
-								class="w-5 h-5 flex-shrink-0 bg-current/20 rounded"
-								aria-hidden="true"
-							></span>
-							<span class="text-sm font-medium">Settings</span>
-						</a>
+							<span class="w-5 h-5 shrink-0 rounded" aria-hidden="true">
+								<img src="/icon-settings.svg" alt="" />
+							</span>
+							<span class="text-xs md:text-sm">Settings</span>
+						</RouterLink>
 					</li>
 				</ul>
 			</nav>
@@ -69,32 +59,11 @@
 
 		<section class="flex flex-col min-w-0">
 			<div class="flex-1 p-8">
-				<p class="space-y-4 text-text-secondary leading-relaxed">
-					<span class="block"
-						>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta
-						enim autem quod fugit quaerat minima illo voluptatibus veritatis?
-						Illum optio unde eum nisi sapiente doloremque minima natus tenetur?
-						Dicta, quis?</span
-					>
-					<span class="block"
-						>Nihil dolores dolorem facere, quia provident unde voluptate
-						blanditiis ipsa culpa id saepe asperiores nisi commodi cum ratione
-						modi aspernatur aliquam voluptatibus, molestias quas dignissimos
-						itaque nesciunt, quasi quae. Vel.</span
-					>
-					<span class="block"
-						>Optio nesciunt sed qui mollitia omnis aspernatur harum, minima
-						pariatur quam quos dolores odit eaque quidem, laborum, placeat cum
-						molestias temporibus vitae hic consequuntur dolore nobis maxime
-						possimus porro. Maiores.</span
-					>
-					<span class="block"
-						>Deserunt, rem blanditiis, consequuntur at id laudantium labore
-						tenetur debitis culpa corrupti nobis provident sed mollitia
-						doloremque tempore dolorem ducimus minima fugit, eius voluptatibus
-						ad perferendis. Deserunt nihil perferendis repellendus?</span
-					>
-				</p>
+				<RouterView v-slot="{ Component }">
+					<Transition name="fade" mode="out-in">
+						<component :is="Component" />
+					</Transition>
+				</RouterView>
 			</div>
 
 			<TheFooter
@@ -103,3 +72,15 @@
 		</section>
 	</main>
 </template>
+
+<style scoped>
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: opacity 0.1s ease;
+	}
+
+	.fade-enter-from,
+	.fade-leave-to {
+		opacity: 0;
+	}
+</style>
