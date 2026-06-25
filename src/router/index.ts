@@ -30,12 +30,6 @@ const router = createRouter({
 						import("@/features/dashboard/views/DashboardView.vue"),
 				},
 				{
-					path: "monitors",
-					name: "monitors",
-					component: () =>
-						import("@/features/monitors/views/MonitorsView.vue"),
-				},
-				{
 					path: "settings",
 					name: "settings",
 					component: () =>

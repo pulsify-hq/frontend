@@ -2,6 +2,24 @@
 	import { RouterLink } from "vue-router";
 	import BaseButton from "../base/BaseButton.vue";
 	import TheFooter from "./TheFooter.vue";
+
+	import { useMonitorModal } from "@/features/monitors/composables/useMonitorModal.ts";
+	import { useRouter, useRoute } from "vue-router";
+	import MonitorForm from "@/features/monitors/components/MonitorForm.vue";
+	import { ref } from "vue";
+
+	const router = useRouter();
+	const route = useRoute();
+	const { isModalOpen, openCreate } = useMonitorModal();
+
+	function handleNewMonitorClick() {
+		if (route.name === "dashboard") {
+			openCreate();
+		} else {
+			router.push({ name: "dashboard" });
+			openCreate();
+		}
+	}
 </script>
 
 <template>
@@ -18,7 +36,12 @@
 				Pulsify
 			</RouterLink>
 
-			<BaseButton class="hidden md:flex w-full mb-6">New Monitor</BaseButton>
+			<BaseButton
+				class="hidden md:flex w-full mb-6 min-w-52 justify-center"
+				@click="handleNewMonitorClick"
+				>New Monitor</BaseButton
+			>
+			<MonitorForm v-model="isModalOpen" />
 
 			<nav aria-label="Main Navigation">
 				<ul
@@ -29,7 +52,7 @@
 					>
 						<RouterLink
 							:to="{ name: 'dashboard' }"
-							class="flex items-center justify-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
+							class="flex items-center max-md:justify-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
 							active-class="md:bg-surface-highest text-primary-dim/70 active-tab"
 						>
 							<span class="w-5 h-5 shrink-0 rounded" aria-hidden="true">
@@ -44,7 +67,7 @@
 					>
 						<RouterLink
 							:to="{ name: 'settings' }"
-							class="flex items-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
+							class="flex items-center max-md:justify-center max-md:flex-col gap-3 max-md:gap-1 p-3 rounded-lg group transition-colors [&:not(.active-tab)]:hover:text-text-muted"
 							active-class="md:bg-surface-highest text-primary-dim/70 active-tab"
 						>
 							<span class="w-5 h-5 shrink-0 rounded" aria-hidden="true">

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 	import BaseButton from "../base/BaseButton.vue";
+	import { useMonitorModal } from "@/features/monitors/composables/useMonitorModal.ts";
+	const {isModalOpen} = useMonitorModal()
 
 	interface Props {
 		title?: string;
@@ -23,7 +25,7 @@
 		<p class="text-text-muted text-sm md:text-base mb-4 md:mb-8">
 			{{ description }}
 		</p>
-		<BaseButton v-if="usesButton" class="w-full">
+		<BaseButton v-if="usesButton" class="w-full" @click="isModalOpen = true">
 			Create a new monitor
 		</BaseButton>
 	</div>
