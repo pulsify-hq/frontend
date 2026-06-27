@@ -1,5 +1,4 @@
 <script setup lang="ts">
-	import { ref } from "vue";
 	import { useAuthStore } from "../stores/authStore";
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
