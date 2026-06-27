@@ -33,7 +33,7 @@
 		:disabled="disabled"
 		:aria-disabled="disabled"
 		:class="buttonStyle, disabledButtonStyle"
-		class="px-4 py-2 text-sm md:text-base border rounded-md font-semibold transition-colors duration-200"
+		class="px-4 py-2 text-sm md:text-base border rounded-md font-semibold transition-colors duration-200 flex items-center justify-center"
 
 	>
 		<slot></slot>

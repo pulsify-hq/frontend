@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+	import { RouterLink } from "vue-router";
 
 	const date = new Date().getFullYear();
 </script>
 
 <template>
-	<footer class="border-t border-border-muted py-6 px-4 md:px-8">
+	<footer class="bg-surface border-t border-border-muted py-6 px-4 md:px-8">
 		<div
-			class="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+			class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 w-full"
 		>
-			<RouterLink to="/" class="text-2xl text-primary text-center md:text-left">Pulsify</RouterLink>
+			<RouterLink to="/" class="text-2xl text-primary text-center md:text-left"
+				>Pulsify</RouterLink
+			>
 			<nav aria-label="Footer navigation">
-				<ul class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+				<ul class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center">
 					<li>
 						<a
 							href="https://github.com/pulsify-hq"

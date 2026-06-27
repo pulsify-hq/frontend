@@ -42,7 +42,7 @@
 	<main>
 		<section
 			aria-label="Hero section"
-			class="flex flex-col min-h-125 justify-center items-center py-12 px-4 relative overflow-hidden"
+			class="flex flex-col min-h-125 justify-center items-center py-12 px-4 relative overflow-hidden bg-surface"
 		>
 			<div
 				class="absolute pointer-events-none -z-10 -top-52 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 blur-[100px] bg-[radial-gradient(circle,rgba(0,255,135,0.15)_0%,transparent_70%)] w-75 h-75 md:w-125 md:h-125"
@@ -85,7 +85,7 @@
 			</div>
 		</section>
 
-		<section aria-label="Features section" class="px-8 py-8 bg-surface">
+		<section aria-label="Features section" class="px-8 py-8">
 			<h2 class="mb-4 text-primary text-xl">Capabilities</h2>
 			<div
 				class="grid md:grid-cols-3 gap-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-2"
