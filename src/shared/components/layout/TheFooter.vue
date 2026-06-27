@@ -13,7 +13,7 @@
 				>Pulsify</RouterLink
 			>
 			<nav aria-label="Footer navigation">
-				<ul class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+				<ul class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center">
 					<li>
 						<a
 							href="https://github.com/pulsify-hq"

@@ -19,7 +19,7 @@
 </script>
 
 <template>
-	<div class="flex flex-col items-center mb-12 md:mb-0">
+	<div class="flex flex-col items-center mb-12 md:mb-0 w-fit">
 		<img :src="imageURL" alt="" class="opacity-50 w-64 mb-4 md:mb-8" />
 		<p class="text-text text-2xl md:text-4xl">{{ title }}</p>
 		<p class="text-text-muted text-sm md:text-base mb-4 md:mb-8">

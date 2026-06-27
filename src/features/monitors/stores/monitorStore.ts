@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import api from "@/shared/utils/api";
 import axios from "axios";
 
-interface Monitor {
+export interface Monitor {
 	id: string;
 	name: string;
 	url: string;
@@ -35,9 +35,10 @@ export const useMonitorStore = defineStore("monitor", {
 
 			try {
 				const response = await api.get("/monitors");
-				this.monitors = response.data.monitors;
+				this.monitors = response.data.monitors ?? [];
 				return true;
 			} catch (err) {
+				this.monitors = []
 				if (axios.isAxiosError(err)) {
 					this.error =
 						err.response?.data?.message ??
