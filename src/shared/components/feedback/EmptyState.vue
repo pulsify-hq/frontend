@@ -7,7 +7,6 @@
 		title?: string;
 		description?: string;
 		imageURL?: string;
-		usesButton?: boolean;
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
@@ -25,8 +24,6 @@
 		<p class="text-text-muted text-sm md:text-base mb-4 md:mb-8">
 			{{ description }}
 		</p>
-		<BaseButton v-if="usesButton" class="w-full" @click="isModalOpen = true">
-			Create a new monitor
-		</BaseButton>
+		<slot></slot>
 	</div>
 </template>

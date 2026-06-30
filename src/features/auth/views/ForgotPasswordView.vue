@@ -5,7 +5,7 @@
 
 	const route = useRoute();
 	const mode =
-		(route.query.mode as "default" | "reset" | "delete") ?? "default";
+		(route.query.mode as "default" | "reset") ?? "default";
 </script>
 
 <template>

@@ -20,7 +20,7 @@
 
 <template>
 	<svg
-		class="animate-spin text-surface"
+		class="animate-spin"
 		:class="size"
 		viewBox="0 0 24 24"
 		fill="none"

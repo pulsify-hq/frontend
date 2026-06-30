@@ -4,10 +4,9 @@
 	import EmailRequestForm from "./EmailRequestForm.vue";
 	import OTPVerifyForm from "./OTPVerifyForm.vue";
 	import ResetPasswordForm from "./ResetPasswordForm.vue";
-	import DeleteAccountForm from "./DeleteAccountForm.vue";
 
 	interface Props {
-		mode?: "default" | "reset" | "delete";
+		mode?: "default" | "reset";
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
@@ -33,23 +32,13 @@
 	}
 
 	function handleDone() {
-		if (props.mode === "delete") {
-			router.push({ name: "home" });
-		} else {
-			router.push({ name: "dashboard" });
-		}
+		router.push({ name: "dashboard" });
 	}
 </script>
 
 <template>
 	<h2 class="text-primary text-xl mb-4">
-		{{
-			step < 3
-				? "Forgot Password"
-				: mode === "reset"
-					? "Reset Password"
-					: "Delete Account"
-		}}
+		{{ step < 3 ? "Forgot Password" : "Reset Password" }}
 	</h2>
 
 	<Transition name="fade" mode="out-in">
@@ -63,12 +52,6 @@
 
 		<ResetPasswordForm
 			v-else-if="step === 3 && mode === 'reset'"
-			:email="verifiedEmail"
-			@done="handleDone"
-		/>
-
-		<DeleteAccountForm
-			v-else-if="step === 3 && mode === 'delete'"
 			:email="verifiedEmail"
 			@done="handleDone"
 		/>

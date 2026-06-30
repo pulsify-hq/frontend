@@ -1,11 +1,9 @@
 <script setup lang="ts">
-	import { ref } from "vue";
 	import { useAuthStore } from "../stores/authStore";
 	import BaseButton from "@/shared/components/base/BaseButton.vue";
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
 	import LoadingSpinner from "@/shared/components/feedback/LoadingSpinner.vue";
 
-	const props = defineProps<{ email: string }>();
 	const emit = defineEmits<{ done: [] }>();
 
 	const store = useAuthStore();
@@ -22,7 +20,7 @@
 
 <template>
 	<div class="flex flex-col gap-6">
-		<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
+		<BaseCard class="py-2!" variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
 
 		<p class="text-text-muted text-xs">
 			Deleting an account is irreversible and you will not be able to retrieve

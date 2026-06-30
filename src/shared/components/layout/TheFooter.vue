@@ -9,7 +9,7 @@
 		<div
 			class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 w-full"
 		>
-			<RouterLink to="/" class="text-2xl text-primary text-center md:text-left"
+			<RouterLink to="/" class="text-2xl text-primary text-center md:text-left font-bold"
 				>Pulsify</RouterLink
 			>
 			<nav aria-label="Footer navigation">

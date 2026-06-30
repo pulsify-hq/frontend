@@ -24,10 +24,10 @@
 
 <template>
 	<main
-		class="grid grid-cols-[auto_1fr] max-md:grid-cols-1 min-h-screen max-md:pb-16 bg-background text-text-main"
+		class="grid grid-cols-[auto_1fr] max-md:grid-cols-1 min-h-screen max-md:pb-16 bg-background text-text"
 	>
 		<section
-			class="bg-surface-high/60 border-r border-surface-highest p-1.5 md:p-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:w-full max-md:h-fit max-md:z-50 backdrop-blur-md"
+			class="bg-surface-high/60 max-md:bg-surface/80 border-r border-surface-highest p-1.5 md:p-4 max-md:fixed max-md:bottom-0 max-md:left-0 max-md:w-full max-md:h-fit max-md:z-50 backdrop-blur-md"
 		>
 			<RouterLink
 				to="/"

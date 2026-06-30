@@ -6,12 +6,16 @@
 	import { useMonitorStore } from "@/features/monitors/stores/monitorStore";
 	import { useMonitorModal } from "@/features/monitors/composables/useMonitorModal";
 	import { useSearch } from "@/shared/composables/useSearch";
+	import BaseButton from "@/shared/components/base/BaseButton.vue";
+	import { useHead } from "@unhead/vue";
+	
+	useHead({ title: "Dashboard — Pulsify" });
 
 	const store = useMonitorStore();
-	const { openEdit: openEditModal } = useMonitorModal();
+	const { openEdit: openEditModal, openCreate } = useMonitorModal();
 
 	onMounted(() => {
-		// store.fetchMonitors();
+		store.fetchMonitors();
 	});
 
 	const { searchQuery, results } = useSearch(
@@ -33,7 +37,11 @@
 		<EmptyState
 			v-if="store.monitors.length === 0"
 			class="flex-1 flex items-center justify-center self-center"
-		/>
+		>
+			<BaseButton class="w-full" @click="openCreate()">
+				Create a new monitor
+			</BaseButton>
+		</EmptyState>
 
 		<template v-else>
 			<BaseInput
