@@ -4,7 +4,6 @@
 	import BaseCard from "@/shared/components/base/BaseCard.vue";
 	import LoadingSpinner from "@/shared/components/feedback/LoadingSpinner.vue";
 
-	const props = defineProps<{ email: string }>();
 	const emit = defineEmits<{ done: [] }>();
 
 	const store = useAuthStore();

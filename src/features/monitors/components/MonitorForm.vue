@@ -9,15 +9,18 @@
 	import { monitorSchema } from "../composables/schema";
 	import { toTypedSchema } from "@vee-validate/zod";
 	import { computed, watch } from "vue";
-import { useMonitorModal } from "../composables/useMonitorModal";
+	import { useMonitorModal } from "../composables/useMonitorModal";
+import BaseCard from '@/shared/components/base/BaseCard.vue';
 
 	const store = useMonitorStore();
 
-	const {editingId} = useMonitorModal()
+	const { editingId } = useMonitorModal();
 	const isOpen = defineModel<boolean>({ default: false });
 
 	const existingMonitor = computed(() =>
-		editingId.value ? store.monitors.find((m) => m.id === editingId.value) : null,
+		editingId.value
+			? store.monitors.find((m) => m.id === editingId.value)
+			: null,
 	);
 
 	const { handleSubmit, errors, defineField, meta, resetForm } = useForm({
@@ -39,7 +42,7 @@ import { useMonitorModal } from "../composables/useMonitorModal";
 
 		if (success) {
 			isOpen.value = false;
-		} 
+		}
 	});
 
 	watch(isOpen, (open) => {
@@ -47,16 +50,19 @@ import { useMonitorModal } from "../composables/useMonitorModal";
 			resetForm({
 				values: {
 					name: existingMonitor.value?.name ?? "",
-					url: existingMonitor.value?.url ?? ""
-				}
-			})
+					url: existingMonitor.value?.url ?? "",
+				},
+			});
 		}
-	})
+	});
 </script>
 
 <template>
-	<BaseModal v-model="isOpen">
+	<BaseModal v-model="isOpen" title="Configure Monitor">
 		<form class="flex flex-col gap-8" @submit.prevent="onSubmit">
+			<BaseCard class="py-2!" variant="danger" v-if="store.error">{{
+				store.error
+			}}</BaseCard>
 			<BaseInput
 				v-model="name"
 				label="Monitor Name"
@@ -77,7 +83,7 @@ import { useMonitorModal } from "../composables/useMonitorModal";
 			/>
 			<BaseButton type="submit">
 				<LoadingSpinner v-if="store.isLoading" />
-				<span v-else>Next</span>
+				<span v-else>Save Monitor</span>
 			</BaseButton>
 		</form>
 		<!-- <button @click="isOpen = false">Close</button> -->

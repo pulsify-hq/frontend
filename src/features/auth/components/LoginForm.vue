@@ -26,7 +26,7 @@ import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner.vue';
 		const success = await store.login(values.email, values.password);
 
 		if (success) {
-			router.push({ name: "home" });
+			router.push({ name: "dashboard" });
 		} else {
 			failCount.value++;
 		}

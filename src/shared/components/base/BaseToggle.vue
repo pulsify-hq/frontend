@@ -2,6 +2,7 @@
 	const props = withDefaults(
 		defineProps<{
 			modelValue?: boolean;
+			ariaLabel?: string;
 		}>(),
 		{
 			modelValue: true,
@@ -19,6 +20,7 @@
 			type="checkbox"
 			class="sr-only peer"
 			:checked="modelValue"
+			:aria-label="ariaLabel"
 			@change="emit('update:modelValue', !modelValue)"
 		/>
 

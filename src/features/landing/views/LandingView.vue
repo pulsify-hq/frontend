@@ -33,7 +33,9 @@
 		aria-label="Site header"
 		class="flex items-center justify-between border-b border-border-muted py-2 md:py-6 px-4 md:px-8"
 	>
-		<RouterLink to="/" class="text-2xl text-primary font-bold"> Pulsify </RouterLink>
+		<RouterLink to="/" class="text-2xl text-primary font-bold">
+			Pulsify
+		</RouterLink>
 
 		<RouterLink :to="{ name: 'auth' }"
 			><BaseButton>Get Started</BaseButton>
@@ -64,7 +66,7 @@
 				Know the moment your services go down. Pulsify monitors your URLs around
 				the clock and alerts you instantly when something breaks.
 			</p>
-			<RouterLink :to="{name: 'auth'}">
+			<RouterLink :to="{ name: 'auth' }">
 				<BaseButton class="">Start Monitoring Now</BaseButton>
 			</RouterLink>
 			<div class="absolute bottom-0 left-0 w-full overflow-hidden opacity-30">
@@ -269,40 +271,33 @@
 							fill="none"
 							class="w-6 h-6"
 						>
-							<rect
-								x="3"
-								y="3"
-								width="18"
-								height="18"
-								rx="2"
-								stroke="#00e478"
-								stroke-width="1.5"
-							/>
-							<path
-								d="M7 8h10M7 12h7"
-								stroke="#00e478"
-								stroke-width="1.5"
-								stroke-linecap="round"
-							/>
 							<circle
-								cx="15"
-								cy="15"
-								r="2"
+								cx="12"
+								cy="12"
+								r="9"
 								stroke="#00e478"
 								stroke-width="1.5"
 							/>
 							<path
-								d="M17 17l2 2"
+								d="M12 7v5l3 3"
 								stroke="#00e478"
 								stroke-width="1.5"
 								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M3 12h1M20 12h1M12 3v1M12 20v1"
+								stroke="#00e478"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								opacity="0.4"
 							/>
 						</svg>
 					</div>
-					<h3>Detailed Logs</h3>
+					<h3>Custom Check Intervals</h3>
 					<p>
-						Every ping is recorded. Search, filter, and review your full
-						monitoring history with timestamps and error details.
+						Check your endpoints every 3, 5, or 10 minutes. You set the pace,
+						Pulsify handles the rest around the clock.
 					</p>
 				</BaseCard>
 
@@ -316,38 +311,47 @@
 							fill="none"
 							class="w-6 h-6"
 						>
-							<rect
-								x="3"
-								y="4"
-								width="18"
-								height="17"
-								rx="2"
+							<circle
+								cx="12"
+								cy="12"
+								r="3"
 								stroke="#00e478"
 								stroke-width="1.5"
 							/>
 							<path
-								d="M3 9h18"
-								stroke="#00e478"
-								stroke-width="1.5"
-								opacity="0.4"
-							/>
-							<path
-								d="M8 4V2M16 4V2"
+								d="M5 12h2M17 12h2"
 								stroke="#00e478"
 								stroke-width="1.5"
 								stroke-linecap="round"
+								opacity="0.4"
 							/>
 							<path
-								d="M7 14h2v3H7zM11 12h2v5h-2zM15 13h2v4h-2z"
-								fill="#00e478"
-								opacity="0.7"
+								d="M7 7l1.5 1.5M15.5 15.5L17 17"
+								stroke="#00e478"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								opacity="0.3"
+							/>
+							<path
+								d="M7 17l1.5-1.5M15.5 8.5L17 7"
+								stroke="#00e478"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								opacity="0.3"
+							/>
+							<path
+								d="M9 12a3 3 0 0 1 3-3"
+								stroke="#00e478"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								opacity="0.6"
 							/>
 						</svg>
 					</div>
-					<h3>Weekly Reports</h3>
+					<h3>Uptime Status Tracking</h3>
 					<p>
-						Get a weekly summary of uptime percentage, incidents, and downtime
-						duration delivered straight to your inbox.
+						Every monitor carries a live UP or DOWN status. Know exactly which
+						services are healthy and which need your attention.
 					</p>
 				</BaseCard>
 			</div>

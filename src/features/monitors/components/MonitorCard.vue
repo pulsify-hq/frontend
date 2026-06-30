@@ -21,7 +21,7 @@
 			:status="props.monitor.status"
 			:last-ping-check="props.monitor.lastPingCheck"
 		/>
-		<BaseButton @click="emit('edit', monitor.id)">Edit</BaseButton>
-		<BaseButton @click="emit('delete', monitor.id)">Delete</BaseButton>
+		<BaseButton @click="emit('edit', props.monitor.id)">Edit</BaseButton>
+		<BaseButton @click="emit('delete', props.monitor.id)">Delete</BaseButton>
 	</BaseCard>
 </template>

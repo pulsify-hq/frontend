@@ -10,6 +10,9 @@
 	import DeleteAccountForm from "@/features/auth/components/DeleteAccountForm.vue";
 	import { onMounted } from "vue";
 
+	import { useHead } from '@unhead/vue'
+useHead({ title: 'Settings — Pulsify' })
+
 	const authStore = useAuthStore();
 	const settingsStore = useSettingsStore();
 	const router = useRouter();
@@ -42,7 +45,7 @@
 						:model-value="authStore.user ?? ''"
 						:type="'email'"
 						:label="'Email Address'"
-						:disabled="true"
+						readonly
 						class="cursor-not-allowed mb-4"
 					></BaseInput>
 					<BaseButton
@@ -71,6 +74,7 @@
 					<div>
 						<BaseToggle
 							:model-value="settingsStore.emailAlerts"
+							aria-label="Email alerts"
 							@update:model-value="handleToggle"
 						/>
 					</div>
@@ -83,10 +87,7 @@
 					Irreversible actions related to your account.
 				</p>
 				<hr class="text-error/20 my-4 -mx-6" />
-				<DeleteAccountForm
-					@done="handleAccountDeleted"
-					:email="`${authStore.user as string}`"
-				></DeleteAccountForm>
+				<DeleteAccountForm @done="handleAccountDeleted"></DeleteAccountForm>
 			</BaseCard>
 		</section>
 	</section>

@@ -31,7 +31,7 @@
 		);
 
 		if (success) {
-			router.push({ name: "home" });
+			router.push({ name: "dashboard" });
 		}
 	});
 

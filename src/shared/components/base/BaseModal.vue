@@ -6,6 +6,7 @@
 		defineProps<{
 			modelValue: boolean;
 			closeable?: boolean;
+			title?: string
 		}>(),
 		{
 			closeable: true,
@@ -45,6 +46,7 @@
 				class="h-screen w-screen fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/90 text-text p-4"
 				role="dialog"
 				aria-modal="true"
+				:aria-label="title ?? 'Dialog'"
 				@click="handleBackdrop"
 			>
 				<BaseCard
