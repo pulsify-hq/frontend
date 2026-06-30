@@ -21,7 +21,7 @@
 
 <template>
 	<div class="flex flex-col gap-6">
-		<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
+		<BaseCard class="py-2!" variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
 
 		<p class="text-text-muted text-xs">
 			Deleting an account is irreversible and you will not be able to retrieve

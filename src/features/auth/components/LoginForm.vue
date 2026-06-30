@@ -42,7 +42,7 @@ import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner.vue';
 		<h2 class="text-primary text-xl mb-4">Sign in to Pulsify</h2>
 
 		<form class="flex flex-col gap-8" @submit.prevent="onSubmit">
-			<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
+			<BaseCard variant="danger" class="py-2!" v-if="store.error">{{ store.error }}</BaseCard>
 
 			<div class="flex flex-col gap-6">
 				<BaseInput

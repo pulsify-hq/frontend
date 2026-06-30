@@ -37,7 +37,7 @@
 
 <template>
 	<form class="flex flex-col gap-8" @submit.prevent="onSubmit">
-		<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
+		<BaseCard class="py-2!" variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
 
 		<BaseInput
 			v-model="email"

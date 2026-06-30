@@ -132,7 +132,8 @@ export const useAuthStore = defineStore("auth", {
 				return true;
 			} catch (err) {
 				if (axios.isAxiosError(err)) {
-					this.error = err.response?.data?.message ?? "Invalid credentials";
+					this.error =
+						err.response?.data?.message ?? "An unexpected error occured";
 				} else {
 					this.error = "Something went wrong";
 				}

@@ -38,11 +38,7 @@
 
 <template>
 	<h2 class="text-primary text-xl mb-4">
-		{{
-			step < 3
-				? "Forgot Password"
-				: "Reset Password"
-		}}
+		{{ step < 3 ? "Forgot Password" : "Reset Password" }}
 	</h2>
 
 	<Transition name="fade" mode="out-in">

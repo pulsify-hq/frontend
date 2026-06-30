@@ -45,7 +45,7 @@
 		<h2 class="text-primary text-xl mb-4">Sign up for Pulsify</h2>
 
 		<form class="flex flex-col gap-8" @submit.prevent="onSubmit">
-			<BaseCard variant="danger" v-if="store.error">{{ store.error }}</BaseCard>
+			<BaseCard variant="danger" class="py-2!" v-if="store.error">{{ store.error }}</BaseCard>
 
 			<div class="flex flex-col gap-6">
 				<BaseInput
