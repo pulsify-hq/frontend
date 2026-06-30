@@ -33,7 +33,7 @@
 		aria-label="Site header"
 		class="flex items-center justify-between border-b border-border-muted py-2 md:py-6 px-4 md:px-8"
 	>
-		<RouterLink to="/" class="text-2xl text-primary"> Pulsify </RouterLink>
+		<RouterLink to="/" class="text-2xl text-primary font-bold"> Pulsify </RouterLink>
 
 		<RouterLink :to="{ name: 'auth' }"
 			><BaseButton>Get Started</BaseButton>
@@ -86,7 +86,7 @@
 		</section>
 
 		<section aria-label="Features section" class="px-8 py-8">
-			<h2 class="mb-4 text-primary text-xl">Capabilities</h2>
+			<h2 class="mb-4 text-primary text-xl font-bold">Capabilities</h2>
 			<div
 				class="grid md:grid-cols-3 gap-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-2"
 			>

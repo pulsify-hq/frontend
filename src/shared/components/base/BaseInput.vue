@@ -23,7 +23,7 @@
 	<div class="flex flex-col gap-1">
 		<label
 			v-if="label"
-			class="text-xs font-mono font-bold uppercase tracking-widest text-text-muted"
+			class="text-xs font-mono font-bold tracking-widest text-text-muted"
 		>
 			{{ label }}
 		</label>

@@ -11,7 +11,7 @@
 	const { openEdit: openEditModal } = useMonitorModal();
 
 	onMounted(() => {
-		// store.fetchMonitors();
+		store.fetchMonitors();
 	});
 
 	const { searchQuery, results } = useSearch(
